@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'is_admin', // Thêm trường này
     ];
 
     /**
@@ -45,4 +46,13 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    /**
+ * Check if user is admin.
+ *
+ * @return bool
+ */
+public function getIsAdminAttribute($value)
+{
+    return (bool) $value;
+}
 }

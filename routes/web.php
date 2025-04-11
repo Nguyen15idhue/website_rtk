@@ -49,5 +49,27 @@ Route::prefix('user')->name('user.')->group(function () {
     Route::post('/logout', function() { /* Logic here */ })->name('logout');
 });
 
+// Admin Routes with auth and admin middlewa
+Route::prefix('admin')->name('admin.')->group(function (){
+    Route::get('/dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/users', [App\Http\Controllers\Admin\UserController::class, 'index'])->name('users');
+    Route::get('/roles', [App\Http\Controllers\Admin\RoleController::class, 'index'])->name('roles');
+    Route::get('/reports', [App\Http\Controllers\Admin\ReportController::class, 'index'])->name('reports');
+    Route::get('/transactions', [App\Http\Controllers\Admin\TransactionController::class, 'index'])->name('transactions');
+    Route::get('/survey-accounts', [App\Http\Controllers\Admin\SurveyAccountController::class, 'index'])->name('survey-accounts');
+    Route::get('/referrals', [App\Http\Controllers\Admin\ReferralController::class, 'index'])->name('referrals');
+});
+
+Route::get('/', function () {
+    if (Auth::check()) {
+        if (Auth::user()->is_admin) {
+            return redirect()->route('admin.dashboard');
+        }
+        return redirect()->route('user.dashboard');
+    }
+
+    return redirect()->route('login');
+});
+
 // Basic Auth routes (if needed later)
 // require __DIR__.'/auth.php';

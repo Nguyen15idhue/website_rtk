@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
         // Gọi UserSeeder
         $this->call([
             UserSeeder::class,
+            AdminUserSeeder::class,
             // Gọi các Seeder khác nếu có ở đây
             // PackageSeeder::class,
             // LocationSeeder::class,
@@ -23,4 +24,5 @@ class DatabaseSeeder extends Seeder
         // Hoặc tạo user trực tiếp ở đây nếu chỉ cần vài record
         // \App\Models\User::factory(10)->create();
     }
+
 }

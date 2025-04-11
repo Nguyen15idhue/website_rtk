@@ -1,26 +1,24 @@
 <?php
 
-namespace App\Http\Controllers\Admin; // Đảm bảo đúng namespace
+namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller; // Kế thừa Controller cơ sở
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\View\View;          // Import View class
+use App\Models\User;
+// Thêm các model khác nếu cần
 
-class DashboardController extends Controller // Đảm bảo đúng tên class và kế thừa
+class DashboardController extends Controller
 {
     /**
-     * Hiển thị trang dashboard của quản trị viên.
-     *
-     * @return \Illuminate\View\View
+     * Display a listing of the resource.
      */
-    public function index(): View // Đây là phương thức mà route đang gọi
+    public function index()
     {
-        // Trong tương lai, bạn sẽ lấy dữ liệu tổng hợp ở đây
-        // Ví dụ: $totalUsers = \App\Models\User::count();
-        // $totalRevenue = \App\Models\Transaction::where('status','approved')->sum('amount');
-        // $data = compact('totalUsers', 'totalRevenue');
+        // Đếm số lượng users
+        $usersCount = User::count();
 
-        // Hiện tại chỉ trả về view
-        return view('admin.dashboard.index'); // Trả về file view bạn đã tạo
+        // Thêm các dữ liệu khác mà bạn cần hiển thị trong dashboard
+
+        return view('admin.dashboard', compact('usersCount'));
     }
 }
